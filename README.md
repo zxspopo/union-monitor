@@ -84,4 +84,4 @@ function getServedPath(appPackageJson) {
 ### 打个小广告
 如果您想使用整个程序监控您的系统。打赏作者喝杯咖啡，可以获得整个前后端的代码哦。
 
-![zan](./image/zan.jpeg) 
+![zan](./image/zan.png) 
