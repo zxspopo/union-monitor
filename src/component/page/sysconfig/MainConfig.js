@@ -127,7 +127,7 @@ class MainConfig extends React.Component {
           <Form.Item
             label="用户名"
           >
-            {getFieldDecorator('username', {
+            {getFieldDecorator('userName', {
               rules: [{ required: true, message: 'Please input username!', whitespace: true }],
             })(<Input readOnly={this.state.view} />)}
           </Form.Item>

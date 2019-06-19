@@ -65,7 +65,7 @@ class AddRule extends React.Component {
         监测结果表达式参考aviator 4.x
         <p>otter: ⎨"success": true,"channelStatus":"正常","pipelineStatus":"正常"⎬</p>
         <p>kafka channel:⎨"success": true,"logSize":"0","offset":"0","lag":"0"⎬</p>
-        <p>url:⎨"success": true,"status":200,"body":"返回结果字符串","bodyMap":"将结果转换成Map"⎬</p>
+        <p>url:⎨"success": true,"status":200,"consumeTime":1000,"body":"返回结果字符串","bodyMap":"将结果转换成Map"⎬</p>
       </div>
     );
 

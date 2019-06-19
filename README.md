@@ -34,11 +34,12 @@
 
 # 运行说明
 ##  初始化工程
-1. create-react-app monitor-ui
-2. npm run eject
-3. npm install --save antd
-4. npm install babel-plugin-import --save-dev
-
+~~1. create-react-app monitor-ui~~
+~~2. npm run eject~~
+~~3. npm install --save antd~~
+~~4. npm install babel-plugin-import --save-dev~~
+1. 运行 npm run start 
+2. 打包 npm run build
 
 
 
