@@ -1,0 +1,140 @@
+// 此处因自己对less弱，且为了遵从ui图，此处不规范，后期待整理
+.sider-container {
+    background: #FFF;
+    height: 100%;
+
+    .sider-logo {
+        background-color: #E53935;
+        color: #FFF;
+        // text-align: center;
+        line-height: 50px;
+        height: 50px;
+
+        .ap {
+            font-size: 34px;
+            transition: all 0.3s cubic-bezier(.215,.61,.355,1);
+        }
+
+    }
+    .menu-list-icon{
+        margin-right: 16px;
+        height: 24px;
+        width: 24px;
+    }
+    .sider-menu {
+        height: calc(~"100% - 50px");
+        padding-top: 10px;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .ant-menu-item {
+            height: 49px;
+            line-height: 49px;
+            margin-bottom: 1px;
+            padding-left: 30px !important;
+        }
+
+        .ant-menu-submenu {
+            .ant-menu-submenu-title {
+                padding-left: 30px !important;
+            }
+            .ant-menu-item {
+                padding-left: 60px !important;
+            }
+        }
+
+        .ant-menu-item-selected {
+            color: rgba(0,0,0,.65);
+            background-color: #f5f5f5;
+        }
+
+        .ant-menu-item:before {
+            transform: scaleY(.0001);
+            opacity: 0;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            border-right: 4px solid #FFA000;
+            transition: transform .15s cubic-bezier(.215,.61,.355,1),opacity .15s cubic-bezier(.215,.61,.355,1);
+        }
+
+        .ant-menu-item-selected:before {
+            transition: transform .15s cubic-bezier(.645,.045,.355,1),opacity .15s cubic-bezier(.645,.045,.355,1);
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        .ant-menu-item-selected:after,
+        .ant-menu-inline .ant-menu-item:after,
+        .ant-menu-vertical-left .ant-menu-item:after,
+        .ant-menu-vertical-right .ant-menu-item:after,
+        .ant-menu-vertical .ant-menu-item:after {
+            display: none;
+        }
+
+        .ant-menu-item .ap,
+        .ant-menu-submenu-title .ap {
+            min-width: 14px;
+            margin-right: 10px;
+            transition: font-size .15s cubic-bezier(.215,.61,.355,1),margin .3s cubic-bezier(.645,.045,.355,1)
+        }
+
+        .ant-menu-item .ap+span,
+        .ant-menu-submenu-title .ap+span {
+            transition: opacity .3s cubic-bezier(.645,.045,.355,1),width .3s cubic-bezier(.645,.045,.355,1);
+        }
+
+        &.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item .ap,
+        &.ant-menu-inline-collapsed>.ant-menu-item .ap,
+        &.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title .ap {
+            font-size: 16px;
+            line-height: 40px;
+            margin: 0;
+        }
+
+        &.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item .ap+span,
+        &.ant-menu-inline-collapsed>.ant-menu-item .ap+span,
+        &.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title .ap+span {
+            max-width: 0;
+            display: inline-block;
+            opacity: 0;
+        }
+
+    }
+
+    a {
+        color: rgba(0,0,0,.65);
+    }
+}
+
+.sider-container.collapsed {
+    flex: 0 0 60px !important;
+    max-width: 60px !important;
+    min-width: 60px !important;
+    width: 60px !important;
+
+    .ap {
+        font-size: 20px;
+    }
+
+    .ant-menu-inline-collapsed {
+        width: 60px;
+    }
+
+    .ant-menu-item {
+        padding-left: 28px !important;
+    }
+
+    .ant-menu-submenu {
+        .ant-menu-submenu-title {
+            padding-left: 28px !important;
+        }
+    }
+
+}
+
+.ant-menu-inline-collapsed-tooltip .ap {
+    display: none;
+}
