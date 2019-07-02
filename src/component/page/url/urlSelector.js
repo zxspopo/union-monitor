@@ -24,12 +24,16 @@ class UrlSelector extends React.Component {
   }
 
   handleSearch = (value) => {
+    handleSearch(value, 0);
+  };
+
+  handleSearch = (value = "", current = 0) => {
     let self = this;
     let existsIds = [];
     for (let i = 0; i < this.props.existsList.length; i++) {
       existsIds.push(this.props.existsList[i].id);
     }
-    listUrl({ "keyword": value }, existsIds, function (data) {
+    listUrl({ "keyword": value, "current": current }, existsIds, function (data) {
       self.setState({
         data: data.dataList,
         pagination: data.pagination
@@ -81,6 +85,12 @@ class UrlSelector extends React.Component {
       selectedRowKeys,
       onChange: this.onSelectChange,
     };
+
+    const paginationProps = {
+      current: this.state.pagination.current,
+      total: this.state.pagination.total,
+      onChange: (current) => this.handleSearch(this.inputValue.input.input.value, current - 1)
+    };
     return (
       <Modal
         title={this.props.title}
@@ -92,10 +102,10 @@ class UrlSelector extends React.Component {
       >
         <Row>
           <Col span={8}>
-            <Search placeholder="input search text" onSearch={value => this.handleSearch(value)} enterButton />
+            <Search placeholder="input search text" ref={input => this.inputValue = input} onSearch={value => this.handleSearch(value)} enterButton />
           </Col>
         </Row>
-        <Table rowKey={record => record.id} rowSelection={rowSelection} columns={columns} dataSource={this.state.data} pagination={this.state.pagination} />
+        <Table rowKey={record => record.id} rowSelection={rowSelection} columns={columns} dataSource={this.state.data} pagination={paginationProps} />
       </Modal>
     );
   }
