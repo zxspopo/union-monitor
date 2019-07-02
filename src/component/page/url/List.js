@@ -20,10 +20,14 @@ class List extends React.Component {
   }
 
   onSearch = (value = "") => {
+    this.onSearch(value, 0);
+  }
+
+  onSearch = (value = "", current = 0) => {
     let self = this;
     listUrl({
       "keyword": value,
-      "current": this.state.pagination.current
+      "current": current
     }, [], function (data) {
       self.setState({
         data: data.dataList,
@@ -76,6 +80,10 @@ class List extends React.Component {
     })
   }
 
+  changePage = (page) => {
+    console.info(page);
+  }
+
   render() {
 
 
@@ -117,18 +125,24 @@ class List extends React.Component {
       },
     ];
 
+    const paginationProps = {
+      current: this.state.pagination.current,
+      total: this.state.pagination.total,
+      onChange: (current) => this.onSearch(this.inputValue.input.input.value, current - 1)
+    };
+
 
     return (
       <div>
         <Row>
           <Col span={8}>
-            <Search placeholder="input search text" onSearch={value => this.onSearch(value)} enterButton />
+            <Search placeholder="input search text" ref={input => this.inputValue = input} onSearch={value => this.onSearch(value)} enterButton />
           </Col>
           <Col span={4}>
             <Button type="primary" onClick={this.addUrl.bind(this)}>新增</Button>
           </Col>
         </Row>
-        <Table columns={columns} dataSource={this.state.data} pagination={this.state.pagination} />
+        <Table columns={columns} dataSource={this.state.data} pagination={paginationProps} />
         <Modal
           title="测试结果"
           visible={this.state.visible}
@@ -139,7 +153,7 @@ class List extends React.Component {
           <div style={{ height: 400, overflow: "auto" }}>{JSON.stringify(this.state.testResult, "\t")}</div>
 
         </Modal>
-      </div>
+      </div >
     );
   }
 }
