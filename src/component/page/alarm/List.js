@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from "react-router-dom";
-import { Table, Input, Modal, Button, Row, Col, message, Divider } from 'antd';
+import { Table, Input, Modal, Button, Row, Col, message, Divider, Tooltip } from 'antd';
 import { listRules, removeRule } from './api';
 
 const confirm = Modal.confirm;
@@ -90,7 +90,15 @@ class List extends React.Component {
       {
         title: '规则',
         dataIndex: 'expression',
-        key: 'expression',
+        render: (text, record) => {
+          if (record.expression.length >= 100) {
+            return <Tooltip title={record.expression}>
+              <span>{record.expression.substr(0, 100)}...</span>
+            </Tooltip>
+          } else {
+            return record.expression;
+          }
+        },
       }, {
         title: '执行周期',
         dataIndex: 'crontab',

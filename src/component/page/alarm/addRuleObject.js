@@ -72,7 +72,7 @@ class AddRoleObject extends React.Component {
       })
     } else if (this.state.ruleInfo.envType == '3') {
       //url
-      listUrl({ "queryAll": "true" }, function (data) {
+      listUrl({ "queryAll": "true" }, [], function (data) {
         let result = update(self.state.dataList, { $merge: data.dataList });
         self.setState({
           dataList: result
