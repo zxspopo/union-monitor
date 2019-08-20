@@ -48,7 +48,7 @@ class SysConfig extends React.Component {
           <MainConfig onRef={this.mailRef.bind(this)} />
         </TabPane>
         <TabPane tab="url" key="url">
-          <PushUrl onRef={this.urlRef.bind(this)} />
+          <PushUrl onRef={this.urlRef.bind(this)} history={this.props.history}/>
         </TabPane>
         <TabPane tab="微信" key="weixin">
           Content of Tab Pane 3

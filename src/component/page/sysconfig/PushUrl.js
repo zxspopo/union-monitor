@@ -48,6 +48,7 @@ class PushUrl extends React.Component {
   }
 
   onDetail = (id) => {
+    debugger
     this.props.history.push("/page/url/addUrl/" + id + "/detail");
   }
 
