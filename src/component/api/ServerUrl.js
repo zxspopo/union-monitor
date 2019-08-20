@@ -36,4 +36,8 @@ export const url = {
   SYSCONF_GET_URL: "/monitor-web/api/sysconfig/url/get",
   SYSCONF_ADD_URL: "/monitor-web/api/sysconfig/url/add",
   SYSCONF_DELETE_URL: "/monitor-web/api/sysconfig/url/delete",
+  MQ_ADD: "/monitor-web/api/rabbitmq/add",
+  MQ_LIST: "/monitor-web/api/rabbitmq/list",
+  MQ_DELETE: "/monitor-web/api/rabbitmq/remove",
+  MQ_GET_BY_IDS:"/monitor-web/api/rabbitmq/getByIds"
 }

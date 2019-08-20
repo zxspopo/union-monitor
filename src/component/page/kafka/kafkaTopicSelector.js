@@ -29,8 +29,11 @@ class KafkaTopicSelector extends React.Component {
     this.props.form.validateFields((err, values) => {
       console.log('Received values of form: ', values);
       let existsIds = [];
-      for (let i = 0; i < this.props.existsList.length; i++) {
-        existsIds.push(this.props.existsList[i].id);
+
+      if (this.props.existsList) {
+        for (let i = 0; i < this.props.existsList.length; i++) {
+          existsIds.push(this.props.existsList[i].id);
+        }
       }
       listTopicForModal(values, existsIds, function (data) {
         self.setState({

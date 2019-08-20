@@ -83,6 +83,10 @@ class List extends React.Component {
             return "CHANNEL";
           } else if (record.envType == '3') {
             return "URL";
+          } else if (record.envType == '4') {
+            return "RABBITMQ";
+          } else if (record.envType == '5') {
+            return "INFLUXDB";
           }
           return "未知";
         },

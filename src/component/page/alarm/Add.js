@@ -66,6 +66,7 @@ class AddRule extends React.Component {
         <p>otter: ⎨"success": true,"channelStatus":"正常","pipelineStatus":"正常"⎬</p>
         <p>kafka channel:⎨"success": true,"logSize":"0","offset":"0","lag":"0"⎬</p>
         <p>url:⎨"success": true,"status":200,"consumeTime":1000,"body":"返回结果字符串","bodyMap":"将结果转换成Map"⎬</p>
+        <p>rabbitmq:⎨"success": true,"consumeTime":1000⎬</p>
       </div>
     );
 
@@ -126,6 +127,8 @@ class AddRule extends React.Component {
             <Option value="1">otter</Option>
             <Option value="2">kafka</Option>
             <Option value="3">url</Option>
+            <Option value="4">rabbitmq</Option>
+            {/* <Option value="5">influxdb</Option> */}
           </Select>)}
         </Form.Item >
         <Form.Item label={<span>

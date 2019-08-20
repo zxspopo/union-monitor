@@ -53,6 +53,7 @@ class CustomMenu extends React.Component {
                     { key: '/page/zookeeper/list', title: 'zookeeper', icon: 'robot' },
                     { key: '/page/kafka/list', title: 'kafka', icon: 'robot' },
                     { key: '/page/otter/list', title: 'otter', icon: 'robot' },
+                    { key: '/page/rabbitmq/list', title: 'rabbitmq', icon: 'robot' },
                     { key: '/page/url/list', title: 'url', icon: 'robot' },
                 ]
             }, {

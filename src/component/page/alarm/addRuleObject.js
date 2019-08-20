@@ -1,14 +1,16 @@
 import React from 'react'
 import { withRouter } from "react-router-dom";
-import { Descriptions, Button, Table, Card, message, Modal } from 'antd';
+import { Descriptions, Button, Table, Card, message, Modal,Tooltip } from 'antd';
 import { getRuleDetail, saveRuleObject } from './api'
 import { listKafkaTopic } from "../kafka/api"
 import { listChannel } from "../otter/api"
 import { listUrl } from "../url/api"
+import { listMQ } from "../rabbitmq/api"
 import update from 'immutability-helper';
 import UrlSelect from '@src/component/page/url/urlSelector'
 import OtterChannelSelector from '@src/component/page/otter/otterChannelSelector'
 import KafkaTopicSelector from '@src/component/page/kafka/kafkaTopicSelector'
+import RabbitMQSelector from "@src/component/page/rabbitmq/RabbitMQSelector"
 
 //此组件的意义就是将数据抽离出来，通过传递数据去渲染
 class AddRoleObject extends React.Component {
@@ -28,9 +30,9 @@ class AddRoleObject extends React.Component {
     getRuleDetail({ "id": id }, function (data) {
       self.setState({
         ruleInfo: data.dataList[0],
-        dataList: data.dataList[0].objectList,
+        dataList: data.dataList[0].objectList || [],
         operate: operate,
-        objectTitle: data.dataList[0].envType == '1' ? '选择otter channel' : data.dataList[0].envType == '2' ? '选择kafka Topic' : '选择url'
+        objectTitle: data.dataList[0].envType == '1' ? '选择otter channel' : data.dataList[0].envType == '2' ? '选择kafka Topic' : data.dataList[0].envType == '3' ? '选择url' : data.dataList[0].envType == '4' ? '选择RabbitMQ' : '选择InfluxDB'
       });
     })
   }
@@ -78,6 +80,23 @@ class AddRoleObject extends React.Component {
           dataList: result
         })
       })
+    } else if (this.state.ruleInfo.envType == '4') {
+      //rabbitmq
+      listMQ({ "queryAll": "true" }, [], function (data) {
+        let result = update(self.state.dataList, { $merge: data.dataList });
+        self.setState({
+          dataList: result
+        })
+      })
+    }
+    else if (this.state.ruleInfo.envType == '5') {
+      //influxdb
+      listUrl({ "queryAll": "true" }, [], function (data) {
+        let result = update(self.state.dataList, { $merge: data.dataList });
+        self.setState({
+          dataList: result
+        })
+      })
     }
   }
 
@@ -85,6 +104,7 @@ class AddRoleObject extends React.Component {
 
   onRemove = (record) => {
     let id = record.id;
+    debugger
     for (let idx = 0; idx < this.state.dataList.length; idx++) {
       const element = this.state.dataList[idx];
       if (id == element.id) {
@@ -208,7 +228,51 @@ class AddRoleObject extends React.Component {
       },
     ];
 
-    const column = this.state.ruleInfo.envType == '1' ? otterColumn : this.state.ruleInfo.envType == '2' ? kafkaColumn : urlColumn;
+    const rabbitmqColumn = [
+      {
+        title: '名称',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text, record) => {
+          return <Tooltip title={record.username + ":" + record.password}>
+            <span>{record.name}</span>
+          </Tooltip >
+        }
+      },
+      {
+        title: 'Host',
+        dataIndex: 'host',
+        key: 'host',
+      },
+      {
+        title: 'Port',
+        dataIndex: 'port',
+        key: 'port',
+      },
+      {
+        title: 'VirtualHost',
+        dataIndex: 'vhost',
+        key: 'vhost',
+      },
+      {
+        title: '创建时间',
+        dataIndex: 'createTime',
+        key: 'createTime',
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <a href="javascript:;" onClick={this.onRemove.bind(this, record)}>删除</a>
+          </span>
+        ),
+      },
+    ];
+
+    const influxdbColumn = [];
+
+    const column = this.state.ruleInfo.envType == '1' ? otterColumn : this.state.ruleInfo.envType == '2' ? kafkaColumn : this.state.ruleInfo.envType == '3' ? urlColumn : this.state.ruleInfo.envType == '4' ? rabbitmqColumn : influxdbColumn;
 
 
     return (
@@ -243,7 +307,12 @@ class AddRoleObject extends React.Component {
             <UrlSelect onRef={this.onRef} visible={this.state.visible} title={this.state.objectTitle} handleOK={this.handleOK} handleCancel={this.handleCancel} existsList={this.state.dataList} /> :
             this.state.ruleInfo.envType == '1' ?
               <OtterChannelSelector onRef={this.onRef} visible={this.state.visible} title={this.state.objectTitle} handleOK={this.handleOK} handleCancel={this.handleCancel} existsList={this.state.dataList} /> :
-              <KafkaTopicSelector onRef={this.onRef} visible={this.state.visible} title={this.state.objectTitle} handleOK={this.handleOK} handleCancel={this.handleCancel} existsList={this.state.dataList} />
+              this.state.ruleInfo.envType == '2' ?
+                <KafkaTopicSelector onRef={this.onRef} visible={this.state.visible} title={this.state.objectTitle} handleOK={this.handleOK} handleCancel={this.handleCancel} existsList={this.state.dataList} />
+                :
+                this.state.ruleInfo.envType == '4' ?
+                  <RabbitMQSelector onRef={this.onRef} visible={this.state.visible} title={this.state.objectTitle} handleOK={this.handleOK} handleCancel={this.handleCancel} existsList={this.state.dataList} /> :
+                  null
         }
       </div >
     )

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Table, Row, Col, Input, Modal } from 'antd';
-import { listUrl, getUrlByKeys } from './api';
+import { Table, Row, Col, Input, Modal,Tooltip } from 'antd';
+import { listMQ, getMQByKeys } from './api';
 
 const Search = Input.Search;
 
 //此组件的意义就是将数据抽离出来，通过传递数据去渲染
-class UrlSelector extends React.Component {
+class RabbitMQSelector extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,13 +30,12 @@ class UrlSelector extends React.Component {
   handleSearch = (value = "", current = 0) => {
     let self = this;
     let existsIds = [];
-
     if (this.props.existsList) {
       for (let i = 0; i < this.props.existsList.length; i++) {
         existsIds.push(this.props.existsList[i].id);
       }
     }
-    listUrl({ "keyword": value, "current": current }, existsIds, function (data) {
+    listMQ({ "keyword": value, "current": current }, existsIds, function (data) {
       self.setState({
         data: data.dataList,
         pagination: data.pagination
@@ -54,7 +53,7 @@ class UrlSelector extends React.Component {
   handleOk = async (e) => {
     let selectData = [];
     if (this.state.selectedRowKeys.length > 0) {
-      let result = await getUrlByKeys(this.state.selectedRowKeys);
+      let result = await getMQByKeys(this.state.selectedRowKeys);
       selectData = result.dataList;
     }
     this.props.handleOK(selectData);
@@ -71,12 +70,27 @@ class UrlSelector extends React.Component {
       {
         title: '名称',
         dataIndex: 'name',
-        key: 'name'
+        key: 'name',
+        render: (text, record) => {
+          return <Tooltip title={record.username + ":" + record.password}>
+            <span>{record.name}</span>
+          </Tooltip >
+        }
       },
       {
-        title: '地址',
-        dataIndex: 'url',
-        key: 'url',
+        title: 'Host',
+        dataIndex: 'host',
+        key: 'host',
+      },
+      {
+        title: 'Port',
+        dataIndex: 'port',
+        key: 'port',
+      },
+      {
+        title: 'VirtualHost',
+        dataIndex: 'vhost',
+        key: 'vhost',
       },
       {
         title: '创建时间',
@@ -113,4 +127,4 @@ class UrlSelector extends React.Component {
     );
   }
 }
-export default UrlSelector
+export default RabbitMQSelector
