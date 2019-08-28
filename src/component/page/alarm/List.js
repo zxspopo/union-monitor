@@ -11,7 +11,9 @@ class List extends React.Component {
 
   state = {
     pagination: {},
-    data: []
+    data: [],
+    visiable: false,
+    tmpl: ""
   };
 
   componentDidMount() {
@@ -64,6 +66,12 @@ class List extends React.Component {
   addRule = () => {
     this.props.history.push("/page/alarm/add")
   }
+
+  onAddTempl = (id) => {
+    this.props.history.push("/page/alarm/addTmpl/" + id);
+  }
+
+
   render() {
     const columns = [
       {
@@ -86,7 +94,7 @@ class List extends React.Component {
           } else if (record.envType == '4') {
             return "RABBITMQ";
           } else if (record.envType == '5') {
-            return "INFLUXDB";
+            return "DB-SQL";
           }
           return "未知";
         },
@@ -118,6 +126,8 @@ class List extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
+            <a href="javascript:;" onClick={this.onAddTempl.bind(this, record.id)}>设置告警模板</a>
+            <Divider type="vertical" />
             <a href="javascript:;" onClick={this.onModify.bind(this, record.id)}>修改规则</a>
             <Divider type="vertical" />
             <a href="javascript:;" onClick={this.onAddObject.bind(this, record.id)}>添加监控对象</a>

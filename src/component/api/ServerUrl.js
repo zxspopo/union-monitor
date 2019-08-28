@@ -31,6 +31,7 @@ export const url = {
   RULE_DETAIL: "/monitor-web/api/rule/detail",
   RULE_ADD_OBJECT: "/monitor-web/api/rule/addObject",
   RULE_DELETE: "/monitor-web/api/rule/remove",
+  RULE_TMPL_ADD: "/monitor-web/api/rule/tmpl/add",
   SYSCONF_GET_MAIL: "/monitor-web/api/sysconfig/mail/get",
   SYSCONF_MODIFY_MAIL: "/monitor-web/api/sysconfig/mail/modify",
   SYSCONF_GET_URL: "/monitor-web/api/sysconfig/url/get",
@@ -39,5 +40,14 @@ export const url = {
   MQ_ADD: "/monitor-web/api/rabbitmq/add",
   MQ_LIST: "/monitor-web/api/rabbitmq/list",
   MQ_DELETE: "/monitor-web/api/rabbitmq/remove",
-  MQ_GET_BY_IDS:"/monitor-web/api/rabbitmq/getByIds"
+  MQ_GET_BY_IDS:"/monitor-web/api/rabbitmq/getByIds",
+  DB_LIST: "/monitor-web/api/db/list",
+  DB_ADD: "/monitor-web/api/db/add",
+  DB_DETAIL: "/monitor-web/api/db/detail",
+  DB_SQL_LIST: "/monitor-web/api/db/sql/list",
+  DB_SQL_ADD: "/monitor-web/api/db/sql/add",
+  DB_SQL_TEST: "/monitor-web/api/db/sql/test",
+  DB_SQL_LIST_BY_IDS: "/monitor-web/api/db/sql/listByIds",
+  DB_SQL_REMOVE_BY_IDS: "/monitor-web/api/db/sql/remove",
+  DB_REMOVE_BY_IDS: "/monitor-web/api/db/remove",
 }

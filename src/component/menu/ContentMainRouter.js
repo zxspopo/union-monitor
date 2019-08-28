@@ -12,6 +12,7 @@ const url = asyncComponent(() => import('../page/url'));
 const alarm = asyncComponent(() => import('../page/alarm'));
 const sysconfig = asyncComponent(() => import('../page/sysconfig'));
 const rabbitmq = asyncComponent(() => import('../page/rabbitmq'));
+const db = asyncComponent(() => import('../page/db'));
 
 
 //使用这种方式，如果组件内有错误，不会加载，只会显示loading
@@ -38,6 +39,7 @@ class ContentMainRouter extends React.Component {
           <Route path='/page/rabbitmq' component={rabbitmq} />
           <Route path='/page/url' component={url} />
           <Route path='/page/alarm' component={alarm} />
+          <Route path='/page/db' component={db} />
           <Route path='/page/sysconfig' component={sysconfig} />
         </Switch>
       </div>

@@ -55,6 +55,7 @@ class CustomMenu extends React.Component {
                     { key: '/page/otter/list', title: 'otter', icon: 'robot' },
                     { key: '/page/rabbitmq/list', title: 'rabbitmq', icon: 'robot' },
                     { key: '/page/url/list', title: 'url', icon: 'robot' },
+                    { key: '/page/db/list', title: 'db', icon: 'robot' },
                 ]
             }, {
                 title: '系统配置',

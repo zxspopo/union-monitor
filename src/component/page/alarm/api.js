@@ -17,6 +17,11 @@ export async function getRuleDetail(params, success) {
   onResponse(response, success)
 }
 
+export async function addTmpl(params, success) {
+  let response = await axios.post(url.RULE_TMPL_ADD, params);
+  onResponse(response, success)
+}
+
 export async function modifyRule(params, success) {
   let response = await axios.post(url.RULE_MODIFY, params);
   onResponse(response, success)

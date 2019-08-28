@@ -6,6 +6,7 @@ import asyncComponent from '@src/utils/asyncComponent.js';
 const List = asyncComponent(() => import('./List'));
 const addRule = asyncComponent(() => import('./Add'));
 const addRuleObject = asyncComponent(() => import('./addRuleObject'));
+const addTmpl = asyncComponent(() => import('./AddTmpl'));
 //使用这种方式，如果组件内有错误，不会加载，只会显示loading
 // const AddNewZk = Loadable({
 //   loader: () => import('./Add'),
@@ -21,6 +22,7 @@ class Zookeeper extends React.Component {
           <Route path='/page/alarm/list' component={List} />
           <Route exact path='/page/alarm/add' component={addRule} />
           <Route exact path='/page/alarm/add/:id/:operate' component={addRule} />
+          <Route exact path='/page/alarm/addTmpl/:id' component={addTmpl} />
           <Route path='/page/alarm/addObject/:id/:operate' component={addRuleObject} />
         </Switch>
       </div>

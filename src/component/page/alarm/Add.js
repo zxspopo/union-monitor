@@ -67,6 +67,7 @@ class AddRule extends React.Component {
         <p>kafka channel:⎨"success": true,"logSize":"0","offset":"0","lag":"0"⎬</p>
         <p>url:⎨"success": true,"status":200,"consumeTime":1000,"body":"返回结果字符串","bodyMap":"将结果转换成Map"⎬</p>
         <p>rabbitmq:⎨"success": true,"consumeTime":1000⎬</p>
+        <p>db:⎨"success": true,"consumeTime":1000,resultMapList:sql结果集的list⎬</p>
       </div>
     );
 
@@ -128,7 +129,7 @@ class AddRule extends React.Component {
             <Option value="2">kafka</Option>
             <Option value="3">url</Option>
             <Option value="4">rabbitmq</Option>
-            {/* <Option value="5">influxdb</Option> */}
+            <Option value="5">db-sql</Option>
           </Select>)}
         </Form.Item >
         <Form.Item label={<span>
