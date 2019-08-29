@@ -61,8 +61,18 @@ class PushUrl extends React.Component {
 
   handleOK = async (dataList) => {
     let result = update(this.state.data, { $push: dataList });
+    let array = [];
+    for(var i=0;i<this.state.data.length;i++){
+      array.push({"id":this.state.data[i].urlEntity.id});
+    }
+    for(var i=0;i<dataList.length;i++){
+      array.push({"id":dataList[i].id});
+    }
+
+
+
     let self = this;
-    await addUrl(result, function (data) {
+    await addUrl(array, function (data) {
       message.info("增加成功")
     });
     self.setState({ visible: false });
